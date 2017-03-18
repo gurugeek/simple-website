@@ -31,19 +31,22 @@ func getLayout(title string) string {
 				}
 
 				h1, h2, h3 {
-					font-weight: 500;
+					font-weight: 400;
+					font-family: 'Linux Libertine', Georgia, Times, serif;
 				}
 
 				h1 {
-					font-size: 1.296rem;
+					font-size: 1.602rem;
+					border-bottom: 1px solid #e0e0e0;
+					margin-bottom: 1.71875rem;
 				}
 
 				h2 {
-					font-size: 1.215rem;
+					font-size: 1.424rem;
 				}
 
 				h3 {
-					font-size: 1.138rem;
+					font-size: 1.266rem;
 				}
 
 				#page {
@@ -61,27 +64,8 @@ func getLayout(title string) string {
 					text-decoration: underline;
 				}
 
-				a:visited {
-					color: #1976d2;
-				}
-
-				nav ul {
-					list-style-type: none;
-					padding: 0;
-				}
-
-				nav.posts li {
-					margin-bottom: 1.25rem;
-				}
-
-				nav.pages li {
-					margin-bottom: 0.5rem;
-				}
-
 				.date {
-					color: rgba(0, 0, 0, 0.54);
-					font-size: 0.878rem;
-					margin-bottom: -0.0625rem;
+					font-size: 0.889rem;
 				}
 
 				pre {
