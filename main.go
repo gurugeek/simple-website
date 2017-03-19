@@ -18,31 +18,20 @@ func getLayout(title string) string {
 			<meta charset="utf-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<title>` + title + `</title>
+			<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
 			<style>
 				body {
-					background-color: #fafafa;
+					background-color: #f5f5f5;
 					color: rgba(0, 0, 0, 0.87);
 					font-family: -apple-system, BlinkMacSystemFont,  'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',  'Fira Sans', 'Droid Sans', 'Helvetica Neue',  sans-serif;
+					letter-spacing: 0.01rem;
 					line-height: 1.6;
 					text-rendering: optimizeLegibility;
-					letter-spacing: 0.01rem;
 				}
 
 				h1, h2, h3 {
 					font-family: 'Linux Libertine', Georgia, Times, serif;
 					font-weight: 400;
-				}
-
-				h1 {
-					font-size: 1.602rem;
-				}
-
-				h2 {
-					font-size: 1.424rem;
-				}
-
-				h3 {
-					font-size: 1.266rem;
 				}
 
 				#page {
@@ -52,8 +41,8 @@ func getLayout(title string) string {
 				}
 
 				a {
+					color: #3f51b5;
 					text-decoration: none;
-					color: #1976d2;
 				}
 
 				a:hover {
@@ -65,14 +54,20 @@ func getLayout(title string) string {
 				}
 
 				pre {
-					background-color: #f5f5f5;
-					padding: 0.25rem;
+					background-color: #eee;
+					border-left: 0.125rem solid #7986CB;
 					line-height: 1.40625rem;
+					overflow: auto;
+					padding: 0.25rem 0.75rem;
 				}
 
 				code {
-					font-family: monospace;
-					font-size: 0.937rem;
+					font-family: Inconsolata, monospace;
+					font-size: 0.875rem;
+				}
+
+				ul {
+					list-style-type: circle;
 				}
 
 				li {
