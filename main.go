@@ -18,7 +18,7 @@ func getLayout(title string) string {
 			<meta charset="utf-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<title>` + title + `</title>
-			<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+			<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet">
 			<style>
 				body {
 					background-color: #f5f5f5;
