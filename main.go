@@ -34,7 +34,7 @@ func getLayout(title string) string {
 					font-weight: 400;
 				}
 
-				#page {
+				.container {
 					margin: 2.5em auto;
 					max-width: 40.625rem;
 					padding: 0 0.5rem;
@@ -55,15 +55,14 @@ func getLayout(title string) string {
 
 				pre {
 					background-color: #eee;
-					border-left: 0.125rem solid #7986CB;
-					line-height: 1.40625rem;
+					border-left: 0.125rem solid #7986cb;
+					line-height: 1.4;
 					overflow: auto;
 					padding: 0.25rem 0.75rem;
 				}
 
 				code {
 					font-family: Inconsolata, monospace;
-					font-size: 0.875rem;
 				}
 
 				ul {
@@ -76,7 +75,7 @@ func getLayout(title string) string {
 			</style>
 		</head>
 		<body>
-			<div id="page">`
+			<div class="container">`
 }
 
 func getFile(f string) []byte {
@@ -199,8 +198,8 @@ func writePostsPage() {
 	for i := len(posts) - 1; i >= 0; i-- {
 		id, date, title := getPostMeta(posts[i])
 
-		b.WriteString("<li><div class=\"date\">" + date +
-			"</div><a href=\"posts/" +
+		b.WriteString("<li><span class=\"date\">" + date +
+			"</span> – <a href=\"posts/" +
 			id + ".html\">" +
 			title + "</a></li>\n")
 	}
