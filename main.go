@@ -18,19 +18,16 @@ func getLayout(title string) string {
 			<meta charset="utf-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<title>` + title + `</title>
-			<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet">
 			<style>
 				body {
-					background-color: #f5f5f5;
+					background-color: #fff;
 					color: rgba(0, 0, 0, 0.87);
 					font-family: -apple-system, BlinkMacSystemFont,  'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',  'Fira Sans', 'Droid Sans', 'Helvetica Neue',  sans-serif;
-					letter-spacing: 0.01rem;
-					line-height: 1.6;
+					line-height: 1.5;
 					text-rendering: optimizeLegibility;
 				}
 
 				h1, h2, h3 {
-					font-family: 'Linux Libertine', Georgia, Times, serif;
 					font-weight: 400;
 				}
 
@@ -41,7 +38,7 @@ func getLayout(title string) string {
 				}
 
 				a {
-					color: #3f51b5;
+					color: #1565C0;
 					text-decoration: none;
 				}
 
@@ -54,23 +51,13 @@ func getLayout(title string) string {
 				}
 
 				pre {
-					background-color: #eee;
-					border-left: 0.125rem solid #7986cb;
-					line-height: 1.4;
+					background-color: #fafafa;
 					overflow: auto;
-					padding: 0.25rem 0.75rem;
-				}
-
-				code {
-					font-family: Inconsolata, monospace;
-				}
-
-				ul {
-					list-style-type: circle;
+					padding: 0.25rem;
 				}
 
 				li {
-					margin-bottom: 0.75rem;
+					margin-bottom: 0.5rem;
 				}
 			</style>
 		</head>
