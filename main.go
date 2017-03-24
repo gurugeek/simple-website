@@ -17,12 +17,15 @@ func getLayout(title string) string {
 		<head>
 			<meta charset="utf-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i" rel="stylesheet">
+			<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet">
 			<title>` + title + `</title>
 			<style>
 				body {
-					background-color: #fff;
+					background-color: #ffffff;
 					color: rgba(0, 0, 0, 0.87);
-					font-family: -apple-system, BlinkMacSystemFont,  'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',  'Fira Sans', 'Droid Sans', 'Helvetica Neue',  sans-serif;
+					font-family: Roboto, sans-serif;
+					font-size: 17px;
 					line-height: 1.5;
 					text-rendering: optimizeLegibility;
 				}
@@ -38,7 +41,7 @@ func getLayout(title string) string {
 				}
 
 				a {
-					color: #1565C0;
+					color: #303f9f;
 					text-decoration: none;
 				}
 
@@ -52,12 +55,29 @@ func getLayout(title string) string {
 
 				pre {
 					background-color: #fafafa;
+					border-left: 3px solid #9fa8da;
 					overflow: auto;
-					padding: 0.25rem;
+					padding: 0.25rem 0.75rem;
 				}
 
-				li {
-					margin-bottom: 0.5rem;
+				code {
+					font-family: Inconsolata, monospace;
+				}
+
+				nav ul {
+					list-style-type: none;
+					padding: 0;
+				}
+
+				nav li {
+					margin-bottom: 1.25rem;
+					padding-left: 2.5rem;
+				}
+
+				.all-posts {
+					font-size: 0.889rem;
+					margin: 1.25rem 0 2.5rem 0;
+					padding-left: 2.5rem;
 				}
 			</style>
 		</head>
@@ -137,7 +157,7 @@ func writePostsSection(b *bytes.Buffer) {
 			title + "</a></li>\n")
 	}
 
-	b.WriteString("</ul></nav><p><a href=\"all-posts.html\">All posts</a></p>")
+	b.WriteString("</ul></nav><p class=\"all-posts\"><a href=\"all-posts.html\">All posts</a></p>")
 }
 
 func writePagesSection(b *bytes.Buffer) {

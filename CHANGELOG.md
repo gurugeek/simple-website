@@ -1,5 +1,9 @@
 # Changelog
 
+## 2017-03-24 – 1.3.0
+
+* Refine design
+
 ## 2017-03-23 – 1.2.6
 
 * Refine design
