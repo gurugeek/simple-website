@@ -50,7 +50,7 @@ func getLayout(title string) string {
 				}
 
 				.date {
-					font-family: Inconsolata, monospace;
+					font-size: 0.889rem;
 				}
 
 				pre {
