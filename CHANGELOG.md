@@ -1,5 +1,9 @@
 # Changelog
 
+## 2017-03-26 – 1.3.2
+
+* Change font size from 18px to 17px
+
 ## 2017-03-26 – 1.3.1
 
 * Refine design

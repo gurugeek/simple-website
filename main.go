@@ -26,7 +26,7 @@ func getLayout(title string) string {
 					background-color: #ffffff;
 					color: rgba(0, 0, 0, 0.87);
 					font-family: 'Noto Serif', serif;
-					font-size: 18px;
+					font-size: 17px;
 					line-height: 1.6;
 					text-rendering: optimizeLegibility;
 				}
