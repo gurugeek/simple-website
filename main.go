@@ -17,7 +17,6 @@ func getLayout(title string) string {
 		<head>
 			<meta charset="utf-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
-			<link href="https://fonts.googleapis.com/css?family=Noto+Serif:400,400i,700,700i" rel="stylesheet">
 			<link href="https://fonts.googleapis.com/css?family=Roboto:400" rel="stylesheet">
 			<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet">
 			<title>` + title + `</title>
@@ -25,14 +24,13 @@ func getLayout(title string) string {
 				body {
 					background-color: #ffffff;
 					color: rgba(0, 0, 0, 0.87);
-					font-family: 'Noto Serif', serif;
+					font-family: Roboto, sans-serif;
 					font-size: 17px;
-					line-height: 1.6;
+					line-height: 1.5;
 					text-rendering: optimizeLegibility;
 				}
 
 				h1, h2, h3 {
-					font-family: Roboto, sans-serif;
 					font-weight: 400;
 				}
 
