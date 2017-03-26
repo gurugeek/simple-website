@@ -17,20 +17,22 @@ func getLayout(title string) string {
 		<head>
 			<meta charset="utf-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
-			<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i" rel="stylesheet">
+			<link href="https://fonts.googleapis.com/css?family=Noto+Serif:400,400i,700,700i" rel="stylesheet">
+			<link href="https://fonts.googleapis.com/css?family=Roboto:400" rel="stylesheet">
 			<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet">
 			<title>` + title + `</title>
 			<style>
 				body {
 					background-color: #ffffff;
 					color: rgba(0, 0, 0, 0.87);
-					font-family: Roboto, sans-serif;
-					font-size: 17px;
-					line-height: 1.5;
+					font-family: 'Noto Serif', serif;
+					font-size: 18px;
+					line-height: 1.6;
 					text-rendering: optimizeLegibility;
 				}
 
 				h1, h2, h3 {
+					font-family: Roboto, sans-serif;
 					font-weight: 400;
 				}
 
@@ -41,7 +43,7 @@ func getLayout(title string) string {
 				}
 
 				a {
-					color: #303f9f;
+					color: #3949ab;
 					text-decoration: none;
 				}
 
@@ -50,12 +52,12 @@ func getLayout(title string) string {
 				}
 
 				.date {
-					font-size: 0.889rem;
+					font-family: Inconsolata, monospace;
 				}
 
 				pre {
 					background-color: #fafafa;
-					border-left: 3px solid #9fa8da;
+					border-left: 3px solid #8c9eff;
 					overflow: auto;
 					padding: 0.25rem 0.75rem;
 				}
@@ -70,8 +72,12 @@ func getLayout(title string) string {
 				}
 
 				nav li {
-					margin-bottom: 1.25rem;
+					margin-bottom: 1rem;
 					padding-left: 2.5rem;
+				}
+
+				nav li .date {
+					margin-right: 1rem;
 				}
 
 				.all-posts {
@@ -152,7 +158,7 @@ func writePostsSection(b *bytes.Buffer) {
 		fileName, date, title := getPostMeta(posts[i])
 
 		b.WriteString("<li><span class=\"date\">" + date +
-			"</span> – <a href=\"posts/" +
+			"</span><a href=\"posts/" +
 			fileName + ".html\">" +
 			title + "</a></li>\n")
 	}
@@ -206,7 +212,7 @@ func writePostsPage() {
 		id, date, title := getPostMeta(posts[i])
 
 		b.WriteString("<li><span class=\"date\">" + date +
-			"</span> – <a href=\"posts/" +
+			"</span><a href=\"posts/" +
 			id + ".html\">" +
 			title + "</a></li>\n")
 	}
