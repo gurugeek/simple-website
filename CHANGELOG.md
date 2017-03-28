@@ -1,5 +1,9 @@
 # Changelog
 
+## 2017-03-28 – 1.4.1
+
+* Use darker shades for dark mode
+
 ## 2017-03-28 – 1.4.0
 
 * Add dark mode

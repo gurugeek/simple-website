@@ -17,7 +17,7 @@ func getLayoutStart(title string) string {
 		<head>
 			<meta charset="utf-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
-			<link href="https://fonts.googleapis.com/css?family=Roboto:400" rel="stylesheet">
+			<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i" rel="stylesheet">
 			<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet">
 			<title>` + title + `</title>
 			<style>
@@ -109,7 +109,7 @@ func getLayoutStart(title string) string {
 				}
 
 				body.dark {
-					background-color: #303030;
+					background-color: #212121;
 					color: rgba(255, 255, 255, 0.7);
 				}
 
@@ -118,12 +118,12 @@ func getLayoutStart(title string) string {
 				}
 
 				body.dark pre {
-					background-color: #424242;
+					background-color: #303030;
 					border-left: 3px solid #3949ab;
 				}
 
 				body.dark .toggle-theme {
-					border-top: 1px solid #424242;
+					border-top: 1px solid #303030;
 				}
 
 				body.dark .toggle-theme a {
