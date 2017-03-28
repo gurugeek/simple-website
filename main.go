@@ -11,7 +11,7 @@ import (
 	"github.com/russross/blackfriday"
 )
 
-func getLayout(title string) string {
+func getLayoutStart(title string) string {
 	return `<!DOCTYPE html>
 	<html>
 		<head>
@@ -22,8 +22,6 @@ func getLayout(title string) string {
 			<title>` + title + `</title>
 			<style>
 				body {
-					background-color: #ffffff;
-					color: rgba(0, 0, 0, 0.87);
 					font-family: Roboto, sans-serif;
 					font-size: 17px;
 					line-height: 1.5;
@@ -38,30 +36,6 @@ func getLayout(title string) string {
 					margin: 2.5em auto;
 					max-width: 40.625rem;
 					padding: 0 0.5rem;
-				}
-
-				a {
-					color: #3949ab;
-					text-decoration: none;
-				}
-
-				a:hover {
-					text-decoration: underline;
-				}
-
-				.date {
-					font-size: 0.889rem;
-				}
-
-				pre {
-					background-color: #fafafa;
-					border-left: 3px solid #8c9eff;
-					overflow: auto;
-					padding: 0.25rem 0.75rem;
-				}
-
-				code {
-					font-family: Inconsolata, monospace;
 				}
 
 				nav ul {
@@ -83,10 +57,123 @@ func getLayout(title string) string {
 					margin: 1.25rem 0 2.5rem 0;
 					padding-left: 2.5rem;
 				}
+
+				a {
+					text-decoration: none;
+				}
+
+				a:hover {
+					text-decoration: underline;
+				}
+
+				.date {
+					font-size: 0.889rem;
+				}
+
+				.toggle-theme {
+					font-size: 0.889rem;
+					margin-top: 3.75rem;
+					padding-top: 1rem;
+					text-align: center;
+				}
+
+				pre {
+					overflow: auto;
+					padding: 0.25rem 0.75rem;
+				}
+
+				code {
+					font-family: Inconsolata, monospace;
+				}
+
+				body.light {
+					background-color: #fafafa;
+					color: rgba(0, 0, 0, 0.87);
+				}
+
+				body.light a {
+					color: #3949ab;
+				}
+
+				body.light pre {
+					background-color: #ffffff;
+					border-left: 3px solid #8c9eff;
+				}
+
+				body.light .toggle-theme {
+					border-top: 1px solid #e0e0e0;
+				}
+
+				body.light .toggle-theme a {
+					color: rgba(0, 0, 0, 0.5);
+				}
+
+				body.dark {
+					background-color: #303030;
+					color: rgba(255, 255, 255, 0.7);
+				}
+
+				body.dark a {
+					color: #8c9eff;
+				}
+
+				body.dark pre {
+					background-color: #424242;
+					border-left: 3px solid #3949ab;
+				}
+
+				body.dark .toggle-theme {
+					border-top: 1px solid #424242;
+				}
+
+				body.dark .toggle-theme a {
+					color: rgba(255, 255, 255, 0.5);
+				}
 			</style>
+			<script>
+				document.addEventListener('DOMContentLoaded', function(event) {
+					if (localStorage.getItem('theme') === 'dark') {
+						setDarkTheme();
+					} else {
+						setLightTheme();
+					}
+				});
+
+				function toggleTheme(event) {
+					event.preventDefault();
+
+					if (document.body.className === 'dark') {
+						setLightTheme();
+					} else {
+						setDarkTheme();
+					}
+				}
+
+				function setLightTheme() {
+						document.body.className = 'light';
+						document.getElementsByClassName('toggle-theme')[0].children[0].innerHTML = 'Dark';
+						localStorage.setItem('theme', 'light');
+				}
+
+				function setDarkTheme() {
+						document.body.className = 'dark';
+						document.getElementsByClassName('toggle-theme')[0].children[0].innerHTML = 'Light';
+						localStorage.setItem('theme', 'dark');
+				}
+			</script>
 		</head>
 		<body>
 			<div class="container">`
+}
+
+func getLayoutEnd() string {
+	return `
+					<p class="toggle-theme">
+						<a href="#" onclick="toggleTheme(event)">Dark</a>
+					</p>
+			</div>
+		</body>
+	</html>`
 }
 
 func getFile(f string) []byte {
@@ -138,11 +225,11 @@ func getPageMeta(fi os.FileInfo) (string, string) {
 
 func writeIndex() {
 	var b bytes.Buffer
-	b.WriteString(getLayout(getSiteTitle()))
+	b.WriteString(getLayoutStart(getSiteTitle()))
 	b.Write(blackfriday.MarkdownBasic(getFile("_sections/header.md")))
 	writePostsSection(&b)
 	writePagesSection(&b)
-	b.WriteString("</div></body></html>")
+	b.WriteString(getLayoutEnd())
 	writeFile("index", b)
 }
 
@@ -187,11 +274,12 @@ func writePosts() {
 		id, date, title := getPostMeta(posts[i])
 
 		var b bytes.Buffer
-		b.WriteString(getLayout(title + " – " + getSiteTitle()))
+		b.WriteString(getLayoutStart(title + " – " + getSiteTitle()))
 		b.WriteString("<p><a href=\"../index.html\">←</a></p>")
 		b.WriteString("<p class=\"date\">" + date + "</p>")
 		b.Write(blackfriday.MarkdownBasic(getFile("_posts/" + posts[i].Name())))
-		b.WriteString("<p><a href=\"../index.html\">←</a></p></div></body></html>")
+		b.WriteString("<p><a href=\"../index.html\">←</a></p>")
+		b.WriteString(getLayoutEnd())
 
 		writeFile("posts/"+id, b)
 	}
@@ -201,7 +289,7 @@ func writePostsPage() {
 	posts := getDir("_posts")
 	var b bytes.Buffer
 
-	b.WriteString(getLayout("All posts – " + getSiteTitle()))
+	b.WriteString(getLayoutStart("All posts – " + getSiteTitle()))
 	b.WriteString("<p><a href=\"index.html\">←</a></p>")
 	b.WriteString("<h1>All posts</h1>")
 	b.WriteString("<nav class=\"posts\"><ul>")
@@ -216,7 +304,7 @@ func writePostsPage() {
 	}
 
 	b.WriteString("</ul></nav><p><a href=\"index.html\">←</a></p>")
-	b.WriteString("</div></body></html>")
+	b.WriteString(getLayoutEnd())
 	writeFile("all-posts", b)
 }
 
@@ -227,10 +315,11 @@ func writePages() {
 		fileName, title := getPageMeta(pages[i])
 
 		var b bytes.Buffer
-		b.WriteString(getLayout(title + " – " + getSiteTitle()))
+		b.WriteString(getLayoutStart(title + " – " + getSiteTitle()))
 		b.WriteString("<p><a href=\"../index.html\">←</a></p>")
 		b.Write(blackfriday.MarkdownBasic(getFile("_pages/" + pages[i].Name())))
-		b.WriteString("<p><a href=\"../index.html\">←</a></p></div></body></html>")
+		b.WriteString("<p><a href=\"../index.html\">←</a></p>")
+		b.WriteString(getLayoutEnd())
 
 		writeFile("pages/"+fileName, b)
 	}

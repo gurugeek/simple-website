@@ -1,5 +1,9 @@
 # Changelog
 
+## 2017-03-28 – 1.4.0
+
+* Add dark mode
+
 ## 2017-03-26 – 1.3.3
 
 * Revert some of the recent changes
