@@ -17,19 +17,18 @@ func getLayoutStart(title string) string {
 		<head>
 			<meta charset="utf-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
-			<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i" rel="stylesheet">
-			<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet">
+			<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i" rel="stylesheet">
+			<link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,400i,500,500i" rel="stylesheet">
 			<title>` + title + `</title>
 			<style>
 				body {
-					font-family: Roboto, sans-serif;
-					font-size: 17px;
-					line-height: 1.5;
+					font-family: 'Roboto', sans-serif;
+					line-height: 1.6;
 					text-rendering: optimizeLegibility;
 				}
 
 				h1, h2, h3 {
-					font-weight: 400;
+					font-weight: 500;
 				}
 
 				.container {
@@ -44,8 +43,7 @@ func getLayoutStart(title string) string {
 				}
 
 				nav li {
-					margin-bottom: 1rem;
-					padding-left: 2.5rem;
+					margin-bottom: 0.5rem;
 				}
 
 				nav li .date {
@@ -55,7 +53,6 @@ func getLayoutStart(title string) string {
 				.all-posts {
 					font-size: 0.889rem;
 					margin: 1.25rem 0 2.5rem 0;
-					padding-left: 2.5rem;
 				}
 
 				a {
@@ -74,7 +71,6 @@ func getLayoutStart(title string) string {
 					font-size: 0.889rem;
 					margin-top: 3.75rem;
 					padding-top: 1rem;
-					text-align: center;
 				}
 
 				pre {
@@ -83,7 +79,7 @@ func getLayoutStart(title string) string {
 				}
 
 				code {
-					font-family: Inconsolata, monospace;
+					font-family: 'Roboto Mono', monospace;
 				}
 
 				body.light {
