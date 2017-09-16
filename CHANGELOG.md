@@ -1,5 +1,9 @@
 # Changelog
 
+## 2017-09-17 – 1.4.2
+
+* Refine design
+
 ## 2017-03-28 – 1.4.1
 
 * Use darker shades for dark mode
