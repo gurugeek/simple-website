@@ -17,12 +17,11 @@ func getLayoutStart(title string) string {
 		<head>
 			<meta charset="utf-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
-			<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i" rel="stylesheet">
-			<link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,400i,500,500i" rel="stylesheet">
 			<title>` + title + `</title>
 			<style>
 				body {
-					font-family: 'Roboto', sans-serif;
+					font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+					font-size: 16px;
 					line-height: 1.6;
 					text-rendering: optimizeLegibility;
 				}
@@ -33,7 +32,7 @@ func getLayoutStart(title string) string {
 
 				.container {
 					margin: 2.5em auto;
-					max-width: 40.625rem;
+					max-width: 50rem;
 					padding: 0 0.5rem;
 				}
 
@@ -79,7 +78,8 @@ func getLayoutStart(title string) string {
 				}
 
 				code {
-					font-family: 'Roboto Mono', monospace;
+					font-size: 0.889rem;
+					font-family: 'Dank Mono', 'Fira Code', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
 				}
 
 				body.light {
@@ -88,12 +88,12 @@ func getLayoutStart(title string) string {
 				}
 
 				body.light a {
-					color: #3949ab;
+					color: #1565c0;
 				}
 
 				body.light pre {
 					background-color: #ffffff;
-					border-left: 3px solid #8c9eff;
+					border-left: 3px solid #5e92f3;
 				}
 
 				body.light .toggle-theme {
@@ -106,16 +106,16 @@ func getLayoutStart(title string) string {
 
 				body.dark {
 					background-color: #212121;
-					color: rgba(255, 255, 255, 0.7);
+					color: rgba(255, 255, 255, 0.75);
 				}
 
 				body.dark a {
-					color: #8c9eff;
+					color: #5e92f3;
 				}
 
 				body.dark pre {
 					background-color: #303030;
-					border-left: 3px solid #3949ab;
+					border-left: 3px solid #1565c0;
 				}
 
 				body.dark .toggle-theme {
