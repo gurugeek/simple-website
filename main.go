@@ -157,7 +157,7 @@ func getLayoutStart(title string) string {
 				}
 
 				body.light a {
-					color: #174ea8;
+					color: #006aee;
 				}
 
 				body.light pre {
@@ -180,7 +180,7 @@ func getLayoutStart(title string) string {
 				}
 
 				body.dark a {
-					color: #8ca9dd;
+					color: #7da7ef;
 				}
 
 				body.dark pre {
