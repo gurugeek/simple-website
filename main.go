@@ -7,7 +7,6 @@ import (
 	"os"
 	"strings"
 	"time"
-
 	"github.com/russross/blackfriday"
 )
 
@@ -17,7 +16,7 @@ func getLayoutStart(title string) string {
 		<head>
 			<meta charset="utf-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
-			<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i" rel="stylesheet">
+			<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400" rel="stylesheet">
 			<link href="https://fonts.googleapis.com/css?family=Roboto+Mono:300" rel="stylesheet">
 			<title>` + title + `</title>
 			<style>
@@ -26,6 +25,16 @@ func getLayoutStart(title string) string {
 					line-height: 1.875;
 					font-weight: 300;
 					font-size: 16px;
+				}
+
+				body.light {
+					background-color: #fdffff;
+					color: #183961;
+				}
+
+				body.dark {
+					background-color: #151c2a;
+					color: #d9dce3;
 				}
 
 				h1 {
@@ -86,6 +95,14 @@ func getLayoutStart(title string) string {
 					text-decoration: none;
 				}
 
+				body.light a {
+					color: #006aee;
+				}
+
+				body.dark a {
+					color: #7da7ef;
+				}
+
 				a:hover {
 					text-decoration: underline;
 				}
@@ -95,20 +112,31 @@ func getLayoutStart(title string) string {
 					margin-top: 40px;
 					padding-top: 24px;
 				}
+				
+				body.light .toggle-theme {
+					border-top: 1px solid #dbe0ec;
+				}
+
+				body.dark .toggle-theme {
+					border-top: 1px solid #2c3240;
+				}
 
 				pre {
 					overflow: auto;
 					padding: 0.25rem 0.75rem;
 				}
 
+				body.light pre {
+					background-color: #f4f7ff;
+				}
+
+				body.dark pre {
+					background-color: #1b2230;
+				}
+
 				code {
 					font-size: 0.889rem;
 					font-family: 'Roboto Mono', monospace;
-				}
-
-				body.light {
-					background-color: #fdffff;
-					color: #183961;
 				}
 
 				body.light h1,
@@ -117,39 +145,48 @@ func getLayoutStart(title string) string {
 					color: #103c7d;
 				}
 
-				body.light a {
-					color: #006aee;
-				}
-
-				body.light pre {
-					background-color: #f4f7ff;
-				}
-
-				body.light .toggle-theme {
-					border-top: 1px solid #dbe0ec;
-				}
-
-				body.dark {
-					background-color: #151c2a;
-					color: #d9dce3;
-				}
-
 				body.dark h1,
 				body.dark h2,
 				body.dark h3 {
 					color: #cbdefd;
 				}
 
-				body.dark a {
-					color: #7da7ef;
+				table {
+					border-collapse: collapse;
+					width: 100%;
 				}
 
-				body.dark pre {
-					background-color: #1b2230;
+				@media (max-width: 1023.98px) {
+					table {
+						font-size: 14px;
+					}
 				}
 
-				body.dark .toggle-theme {
-					border-top: 1px solid #2c3240;
+				@media (min-width: 1024px) {
+					table {
+						font-size: 15px;
+						margin-bottom: 40px;
+					}
+				}
+
+				body.light tr {
+					border-bottom: 0.5px solid #dbe0ec;
+				}
+
+				body.dark tr {
+					border-bottom: 0.5px solid #2c3240;
+				}
+
+				th {
+					text-align: left;
+					font-weight: 400;
+					padding: 12px;
+					white-space: nowrap;
+				}
+
+				td {
+					padding: 12px;
+					white-space: nowrap;
 				}
 			</style>
 			<script>
@@ -248,7 +285,7 @@ func getPageMeta(fi os.FileInfo) (string, string) {
 func writeIndex() {
 	var b bytes.Buffer
 	b.WriteString(getLayoutStart(getSiteTitle()))
-	b.Write(blackfriday.MarkdownBasic(getFile("_sections/header.md")))
+	b.Write(blackfriday.MarkdownCommon(getFile("_sections/header.md")))
 	writePostsSection(&b)
 	writePagesSection(&b)
 	b.WriteString(getLayoutEnd())
@@ -299,7 +336,7 @@ func writePosts() {
 		b.WriteString(getLayoutStart(title + " – " + getSiteTitle()))
 		b.WriteString("<p><a href=\"../index.html\">←</a></p>")
 		b.WriteString("<p class=\"date\">" + date + "</p>")
-		b.Write(blackfriday.MarkdownBasic(getFile("_posts/" + posts[i].Name())))
+		b.Write(blackfriday.MarkdownCommon(getFile("_posts/" + posts[i].Name())))
 		b.WriteString("<p><a href=\"../index.html\">←</a></p>")
 		b.WriteString(getLayoutEnd())
 
@@ -339,7 +376,7 @@ func writePages() {
 		var b bytes.Buffer
 		b.WriteString(getLayoutStart(title + " – " + getSiteTitle()))
 		b.WriteString("<p><a href=\"../index.html\">←</a></p>")
-		b.Write(blackfriday.MarkdownBasic(getFile("_pages/" + pages[i].Name())))
+		b.Write(blackfriday.MarkdownCommon(getFile("_pages/" + pages[i].Name())))
 		b.WriteString("<p><a href=\"../index.html\">←</a></p>")
 		b.WriteString(getLayoutEnd())
 
