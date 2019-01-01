@@ -1,5 +1,10 @@
 # Changelog
 
+## 2019-01-01 – 1.5.0
+
+- Use colors from the [Dainty](https://dainty.site) project
+- Use media queries, and optimize for mobile and desktop
+
 ## 2018-09-28 – 1.4.3
 
 - Revert to using system fonts

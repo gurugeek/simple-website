@@ -17,22 +17,88 @@ func getLayoutStart(title string) string {
 		<head>
 			<meta charset="utf-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i" rel="stylesheet">
 			<title>` + title + `</title>
 			<style>
 				body {
-					font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-					font-size: 16px;
-					line-height: 1.6;
-					text-rendering: optimizeLegibility;
+					font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+					font-size: 18px;
+					line-height: 1.875;
+					font-weight: 300;
 				}
 
-				h1, h2, h3 {
-					font-weight: 500;
+				@media (max-width: 1439.98px) {
+					div {
+						font-size: 16px;
+					}
+				}
+
+				@media (min-width: 1440px) {
+					div {
+						font-size: 17px;
+					}
+				}
+
+				h1 {
+					font-weight: 300;
+					margin-top: 24px;
+					margin-bottom: 0px;
+				}
+	
+				h2 {
+					font-weight: 300;
+					margin-top: 40px;
+					margin-bottom: 0px;
+				}
+	
+				h3 {
+					font-weight: 300;
+					margin-top: 40px;
+					margin-bottom: 0px;
+				}
+	
+				@media (max-width: 1023.98px) {
+					h1 {
+						font-size: 30px;
+					}
+		
+					h2 {
+						font-size: 22px;
+					}
+		
+					h3 {
+						font-size: 16px;
+					}
+				}
+	
+				@media (min-width: 1024px) {
+					h1 {
+						font-size: 31px;
+					}
+		
+					h2 {
+						font-size: 23px;
+					}
+		
+					h3 {
+						font-size: 17px;
+					}
+				}
+
+				@media (max-width: 1023.98px) {
+					.container {
+						margin: 28px auto 48px auto;
+					}
+				}
+
+				@media (min-width: 1024px) {
+					.container {
+						margin: 48px auto;
+					}
 				}
 
 				.container {
-					margin: 2.5em auto;
-					max-width: 50rem;
+					max-width: 56rem;
 					padding: 0 0.5rem;
 				}
 
@@ -46,7 +112,8 @@ func getLayoutStart(title string) string {
 				}
 
 				nav li .date {
-					margin-right: 1rem;
+					display: inline-block;
+					width: 104px;
 				}
 
 				.all-posts {
@@ -62,14 +129,10 @@ func getLayoutStart(title string) string {
 					text-decoration: underline;
 				}
 
-				.date {
-					font-size: 0.889rem;
-				}
-
 				.toggle-theme {
 					font-size: 0.889rem;
-					margin-top: 3.75rem;
-					padding-top: 1rem;
+					margin-top: 40px;
+					padding-top: 24px;
 				}
 
 				pre {
@@ -83,47 +146,49 @@ func getLayoutStart(title string) string {
 				}
 
 				body.light {
-					background-color: #fafafa;
-					color: rgba(0, 0, 0, 0.87);
+					background-color: #fdffff;
+					color: #183961;
+				}
+
+				body.light h1,
+				body.light h2,
+				body.light h3 {
+					color: #103c7d;
 				}
 
 				body.light a {
-					color: #1565c0;
+					color: #174ea8;
 				}
 
 				body.light pre {
-					background-color: #ffffff;
-					border-left: 3px solid #5e92f3;
+					background-color: #f4f7ff;
 				}
 
 				body.light .toggle-theme {
-					border-top: 1px solid #e0e0e0;
-				}
-
-				body.light .toggle-theme a {
-					color: rgba(0, 0, 0, 0.5);
+					border-top: 1px solid #dbe0ec;
 				}
 
 				body.dark {
-					background-color: #212121;
-					color: rgba(255, 255, 255, 0.75);
+					background-color: #151c2a;
+					color: #d9dce3;
+				}
+
+				body.dark h1,
+				body.dark h2,
+				body.dark h3 {
+					color: #cbdefd;
 				}
 
 				body.dark a {
-					color: #5e92f3;
+					color: #8ca9dd;
 				}
 
 				body.dark pre {
-					background-color: #303030;
-					border-left: 3px solid #1565c0;
+					background-color: #1b2230;
 				}
 
 				body.dark .toggle-theme {
-					border-top: 1px solid #303030;
-				}
-
-				body.dark .toggle-theme a {
-					color: rgba(255, 255, 255, 0.5);
+					border-top: 1px solid #2c3240;
 				}
 			</style>
 			<script>
