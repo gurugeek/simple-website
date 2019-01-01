@@ -18,10 +18,11 @@ func getLayoutStart(title string) string {
 			<meta charset="utf-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i" rel="stylesheet">
+			<link href="https://fonts.googleapis.com/css?family=Roboto+Mono:300" rel="stylesheet">
 			<title>` + title + `</title>
 			<style>
 				body {
-					font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+					font-family: Roboto, sans-serif;
 					font-size: 18px;
 					line-height: 1.875;
 					font-weight: 300;
@@ -40,15 +41,15 @@ func getLayoutStart(title string) string {
 				}
 
 				h1 {
-					font-weight: 300;
 					margin-top: 24px;
 					margin-bottom: 0px;
+					font-weight: 300;
 				}
 	
 				h2 {
-					font-weight: 300;
 					margin-top: 40px;
 					margin-bottom: 0px;
+					font-weight: 300;
 				}
 	
 				h3 {
@@ -142,7 +143,7 @@ func getLayoutStart(title string) string {
 
 				code {
 					font-size: 0.889rem;
-					font-family: 'Dank Mono', 'Fira Code', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+					font-family: 'Roboto Mono', monospace;
 				}
 
 				body.light {
