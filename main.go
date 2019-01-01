@@ -23,18 +23,17 @@ func getLayoutStart(title string) string {
 			<style>
 				body {
 					font-family: Roboto, sans-serif;
-					font-size: 18px;
 					line-height: 1.875;
 					font-weight: 300;
 				}
 
-				@media (max-width: 1439.98px) {
+				@media (max-width: 1023.98px) {
 					div {
 						font-size: 16px;
 					}
 				}
 
-				@media (min-width: 1440px) {
+				@media (min-width: 1024px) {
 					div {
 						font-size: 17px;
 					}
