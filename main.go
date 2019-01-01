@@ -53,9 +53,9 @@ func getLayoutStart(title string) string {
 				}
 	
 				h3 {
-					font-weight: 300;
-					margin-top: 40px;
+					margin-top: 24px;
 					margin-bottom: 0px;
+					font-weight: 300;
 				}
 	
 				@media (max-width: 1023.98px) {
