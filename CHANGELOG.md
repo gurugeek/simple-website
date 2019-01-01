@@ -1,5 +1,9 @@
 # Changelog
 
+## 2019-01-01 – 1.5.1
+
+- Refine design
+
 ## 2019-01-01 – 1.5.0
 
 - Use colors from the [Dainty](https://dainty.site) project

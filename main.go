@@ -25,66 +25,27 @@ func getLayoutStart(title string) string {
 					font-family: Roboto, sans-serif;
 					line-height: 1.875;
 					font-weight: 300;
-				}
-
-				@media (max-width: 1023.98px) {
-					div {
-						font-size: 16px;
-					}
-				}
-
-				@media (min-width: 1024px) {
-					div {
-						font-size: 17px;
-					}
+					font-size: 16px;
 				}
 
 				h1 {
+					font-size: 30px;
 					margin-top: 24px;
-					margin-bottom: 0px;
 					font-weight: 300;
 				}
 	
 				h2 {
+					font-size: 22px;
 					margin-top: 40px;
-					margin-bottom: 0px;
 					font-weight: 300;
 				}
 	
 				h3 {
+					font-size: 16px;
 					margin-top: 24px;
-					margin-bottom: 0px;
 					font-weight: 300;
 				}
 	
-				@media (max-width: 1023.98px) {
-					h1 {
-						font-size: 30px;
-					}
-		
-					h2 {
-						font-size: 22px;
-					}
-		
-					h3 {
-						font-size: 16px;
-					}
-				}
-	
-				@media (min-width: 1024px) {
-					h1 {
-						font-size: 31px;
-					}
-		
-					h2 {
-						font-size: 23px;
-					}
-		
-					h3 {
-						font-size: 17px;
-					}
-				}
-
 				@media (max-width: 1023.98px) {
 					.container {
 						margin: 28px auto 48px auto;
