@@ -37,22 +37,23 @@ func getLayoutStart(title string) string {
 					color: #d9dce3;
 				}
 
+				h1, h2, h3 {
+					font-weight: 300;
+				}
+
 				h1 {
 					font-size: 30px;
 					margin-top: 24px;
-					font-weight: 300;
 				}
 	
 				h2 {
 					font-size: 22px;
 					margin-top: 40px;
-					font-weight: 300;
 				}
 	
 				h3 {
 					font-size: 16px;
 					margin-top: 40px;
-					font-weight: 300;
 				}
 
 				body.light h1,
