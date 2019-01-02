@@ -33,8 +33,8 @@ func getLayoutStart(title string) string {
 				}
 
 				body.dark {
-					background-color: #151c2a;
-					color: #d9dce3;
+					background-color: #141c2b;
+					color: #d9dce4;
 				}
 
 				h1, h2, h3 {
