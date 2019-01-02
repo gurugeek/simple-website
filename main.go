@@ -80,8 +80,8 @@ func getLayoutStart(title string) string {
 				}
 
 				.container {
-					max-width: 56rem;
-					padding: 0 0.5rem;
+					max-width: 896px;
+					padding: 0 16px;
 				}
 
 				nav ul {
@@ -90,7 +90,7 @@ func getLayoutStart(title string) string {
 				}
 
 				nav li {
-					margin-bottom: 0.5rem;
+					margin-bottom: 8px;
 				}
 
 				nav li .date {
@@ -99,8 +99,8 @@ func getLayoutStart(title string) string {
 				}
 
 				.all-posts {
-					font-size: 0.889rem;
-					margin: 1.25rem 0 2.5rem 0;
+					font-size: 0.875rem;
+					margin: 16px 0 32px 0;
 				}
 
 				a {
@@ -148,7 +148,7 @@ func getLayoutStart(title string) string {
 				}
 
 				code {
-					font-size: 0.889rem;
+					font-size: 0.875em;
 					font-family: 'Roboto Mono', monospace;
 				}
 
