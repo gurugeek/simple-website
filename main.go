@@ -51,10 +51,22 @@ func getLayoutStart(title string) string {
 	
 				h3 {
 					font-size: 16px;
-					margin-top: 24px;
+					margin-top: 40px;
 					font-weight: 300;
 				}
-	
+
+				body.light h1,
+				body.light h2,
+				body.light h3 {
+					color: #103c7d;
+				}
+
+				body.dark h1,
+				body.dark h2,
+				body.dark h3 {
+					color: #cbdefd;
+				}
+
 				@media (max-width: 1023.98px) {
 					.container {
 						margin: 28px auto 48px auto;
@@ -95,16 +107,16 @@ func getLayoutStart(title string) string {
 					text-decoration: none;
 				}
 
+				a:hover {
+					text-decoration: underline;
+				}
+
 				body.light a {
 					color: #006aee;
 				}
 
 				body.dark a {
 					color: #7da7ef;
-				}
-
-				a:hover {
-					text-decoration: underline;
 				}
 
 				.toggle-theme {
@@ -124,6 +136,7 @@ func getLayoutStart(title string) string {
 				pre {
 					overflow: auto;
 					padding: 0.25rem 0.75rem;
+					margin-bottom: 32px;
 				}
 
 				body.light pre {
@@ -139,21 +152,10 @@ func getLayoutStart(title string) string {
 					font-family: 'Roboto Mono', monospace;
 				}
 
-				body.light h1,
-				body.light h2,
-				body.light h3 {
-					color: #103c7d;
-				}
-
-				body.dark h1,
-				body.dark h2,
-				body.dark h3 {
-					color: #cbdefd;
-				}
-
 				table {
 					border-collapse: collapse;
 					width: 100%;
+					margin-bottom: 32px;
 				}
 
 				@media (max-width: 1023.98px) {
@@ -165,7 +167,6 @@ func getLayoutStart(title string) string {
 				@media (min-width: 1024px) {
 					table {
 						font-size: 15px;
-						margin-bottom: 40px;
 					}
 				}
 
