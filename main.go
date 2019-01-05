@@ -58,13 +58,13 @@ func getLayoutStart(title string) string {
 				body.light h1,
 				body.light h2,
 				body.light h3 {
-					color: #103c7d;
+					color: #black;
 				}
 
 				body.dark h1,
 				body.dark h2,
 				body.dark h3 {
-					color: #cbdefd;
+					color: #white;
 				}
 
 				@media (max-width: 1023.98px) {
