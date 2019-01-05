@@ -4,6 +4,8 @@ simple-website is a static site generator written in Go. It takes Markdown as in
 
 simple-website has been designed with technical simplicity and readability in mind – there are no configuration options and no themes to choose from. The workflow is simple – initialize a website using `simple-website`, create and/or edit Markdown files, run `simple-website` again – and publish.
 
+# now with a retro typewriter font 
+
 ## Get it
 
     go get github.com/alexanderte/simple-website
