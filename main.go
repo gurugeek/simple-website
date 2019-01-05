@@ -16,12 +16,11 @@ func getLayoutStart(title string) string {
 		<head>
 			<meta charset="utf-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
-			<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400" rel="stylesheet">
-			<link href="https://fonts.googleapis.com/css?family=Roboto+Mono:300" rel="stylesheet">
+			<link href="https://fonts.googleapis.com/css?family=Special+Elite" rel="stylesheet">
 			<title>` + title + `</title>
 			<style>
 				body {
-					font-family: Roboto, sans-serif;
+					font-family: Special Elite, cursive;
 					line-height: 1.875;
 					font-weight: 300;
 					font-size: 16px;
@@ -150,7 +149,7 @@ func getLayoutStart(title string) string {
 
 				code {
 					font-size: 0.875em;
-					font-family: 'Roboto Mono', monospace;
+					font-family: 'Special Elite Mono', monospace;
 				}
 
 				table {
@@ -191,6 +190,7 @@ func getLayoutStart(title string) string {
 					white-space: nowrap;
 				}
 			</style>
+
 			<script>
 				document.addEventListener('DOMContentLoaded', function(event) {
 					if (localStorage.getItem('theme') === 'dark') {
