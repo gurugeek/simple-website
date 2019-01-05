@@ -28,12 +28,12 @@ func getLayoutStart(title string) string {
 
 				body.light {
 					background-color: #fdffff;
-					color: #183961;
+					color: #black;
 				}
 
 				body.dark {
 					background-color: #141c2b;
-					color: #d9dce4;
+					color: #white;
 				}
 
 				h1, h2, h3 {
