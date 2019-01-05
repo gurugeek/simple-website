@@ -189,6 +189,11 @@ func getLayoutStart(title string) string {
 					padding: 12px;
 					white-space: nowrap;
 				}
+				body {
+                                          background-image: url("bg.jpg");
+
+                                      }
+
 			</style>
 
 			<script>
