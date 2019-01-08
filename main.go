@@ -8,16 +8,190 @@ import (
 	"strings"
 	"time"
 	"github.com/russross/blackfriday"
+	"github.com/aymerick/raymond"
 )
 
 func getLayoutStart(title string) string {
-	return `<!DOCTYPE html>
+	tpl := string(getFile("template.html"))
+	ctx := map[string]string{
+        "title": title,
+    	}
+
+    	result, err := raymond.Render(tpl, ctx)
+    	if err != nil {
+        	panic("Please report a bug :)")
+    	}	
+	return result;
+	
+}
+func getLayoutEnd() string{
+	return `
+					<p class="toggle-theme">
+						<a href="#" onclick="toggleTheme(event)">Dark</a>
+					</p>
+			</div>
+		</body>
+	</html>`
+}
+
+func getFile(f string) []byte {
+	b, err := ioutil.ReadFile(f)
+
+	if err != nil {
+		panic(err)
+	}
+
+	return b
+}
+
+func getDir(dir string) []os.FileInfo {
+	p, err := ioutil.ReadDir(dir)
+
+	if err != nil {
+		panic(err)
+	}
+
+	return p
+}
+
+func writeFile(fileName string, b bytes.Buffer) {
+	err := ioutil.WriteFile(fileName+".html", b.Bytes(), 0644)
+
+	if err != nil {
+		panic(err)
+	}
+}
+
+func getSiteTitle() string {
+	return strings.Split(string(getFile("_sections/header.md")), "\n")[0][2:]
+}
+
+func getPostMeta(fi os.FileInfo) (string, string, string) {
+	id := fi.Name()[:len(fi.Name())-3]
+	date := fi.Name()[0:10]
+	title := strings.Split(string(getFile("_posts/"+fi.Name())), "\n")[0][2:]
+
+	return id, date, title
+}
+
+func getPageMeta(fi os.FileInfo) (string, string) {
+	id := fi.Name()[:len(fi.Name())-3]
+	title := strings.Split(string(getFile("_pages/"+fi.Name())), "\n")[0][2:]
+
+	return id, title
+}
+
+func writeIndex() {
+	var b bytes.Buffer
+	b.WriteString(getLayoutStart(getSiteTitle()))
+	b.Write(blackfriday.MarkdownCommon(getFile("_sections/header.md")))
+	writePostsSection(&b)
+	writePagesSection(&b)
+	b.WriteString(getLayoutEnd())
+	writeFile("index", b)
+}
+
+func writePostsSection(b *bytes.Buffer) {
+	b.WriteString("<h2>Posts</h2><nav class=\"posts\"><ul>")
+
+	posts := getDir("_posts")
+	limit := int(math.Max(float64(len(posts))-5, 0))
+
+	for i := len(posts) - 1; i >= limit; i-- {
+		fileName, date, title := getPostMeta(posts[i])
+
+		b.WriteString("<li><span class=\"date\">" + date +
+			"</span><a href=\"posts/" +
+			fileName + ".html\">" +
+			title + "</a></li>\n")
+	}
+
+	b.WriteString("</ul></nav><p class=\"all-posts\"><a href=\"all-posts.html\">All posts</a></p>")
+}
+
+func writePagesSection(b *bytes.Buffer) {
+	b.WriteString("<h2>Pages</h2><nav class=\"pages\"><ul>")
+
+	pages := getDir("_pages")
+
+	for i := 0; i < len(pages); i++ {
+		id, title := getPageMeta(pages[i])
+
+		b.WriteString("<li><a href=\"pages/" +
+			id + ".html\">" +
+			title + "</a></li>\n")
+	}
+
+	b.WriteString("</ul></nav>")
+}
+
+func writePosts() {
+	posts := getDir("_posts")
+
+	for i := 0; i < len(posts); i++ {
+		id, date, title := getPostMeta(posts[i])
+
+		var b bytes.Buffer
+		b.WriteString(getLayoutStart(title + " – " + getSiteTitle()))
+		b.WriteString("<p><a href=\"../index.html\">←</a></p>")
+		b.WriteString("<p class=\"date\">" + date + "</p>")
+		b.Write(blackfriday.MarkdownCommon(getFile("_posts/" + posts[i].Name())))
+		b.WriteString("<p><a href=\"../index.html\">←</a></p>")
+		b.WriteString(getLayoutEnd())
+
+		writeFile("posts/"+id, b)
+	}
+}
+
+func writePostsPage() {
+	posts := getDir("_posts")
+	var b bytes.Buffer
+
+	b.WriteString(getLayoutStart("All posts – " + getSiteTitle()))
+	b.WriteString("<p><a href=\"index.html\">←</a></p>")
+	b.WriteString("<h1>All posts</h1>")
+	b.WriteString("<nav class=\"posts\"><ul>")
+
+	for i := len(posts) - 1; i >= 0; i-- {
+		id, date, title := getPostMeta(posts[i])
+
+		b.WriteString("<li><span class=\"date\">" + date +
+			"</span><a href=\"posts/" +
+			id + ".html\">" +
+			title + "</a></li>\n")
+	}
+
+	b.WriteString("</ul></nav><p><a href=\"index.html\">←</a></p>")
+	b.WriteString(getLayoutEnd())
+	writeFile("all-posts", b)
+}
+
+func writePages() {
+	pages := getDir("_pages")
+
+	for i := 0; i < len(pages); i++ {
+		fileName, title := getPageMeta(pages[i])
+
+		var b bytes.Buffer
+		b.WriteString(getLayoutStart(title + " – " + getSiteTitle()))
+		b.WriteString("<p><a href=\"../index.html\">←</a></p>")
+		b.Write(blackfriday.MarkdownCommon(getFile("_pages/" + pages[i].Name())))
+		b.WriteString("<p><a href=\"../index.html\">←</a></p>")
+		b.WriteString(getLayoutEnd())
+
+		writeFile("pages/"+fileName, b)
+	}
+}
+
+func createTemplate() {
+
+	tpl := `<!DOCTYPE html>
 	<html>
 		<head>
 			<meta charset="utf-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<link href="https://fonts.googleapis.com/css?family=Special+Elite" rel="stylesheet">
-			<title>` + title + `</title>
+			<title>{{TITLE}}</title>
 			<style>
 				body {
 					font-family: Special Elite, cursive;
@@ -229,166 +403,18 @@ func getLayoutStart(title string) string {
 			</script>
 		</head>
 		<body>
-			<div class="container">`
-}
+			<div class="container">
+`
+	if _, err := os.Stat("template.html"); os.IsNotExist(err) {
+                err := ioutil.WriteFile(
+                        "template.html",
+                        []byte(tpl),
+                        0644)
 
-func getLayoutEnd() string {
-	return `
-					<p class="toggle-theme">
-						<a href="#" onclick="toggleTheme(event)">Dark</a>
-					</p>
-			</div>
-		</body>
-	</html>`
-}
-
-func getFile(f string) []byte {
-	b, err := ioutil.ReadFile(f)
-
-	if err != nil {
-		panic(err)
-	}
-
-	return b
-}
-
-func getDir(dir string) []os.FileInfo {
-	p, err := ioutil.ReadDir(dir)
-
-	if err != nil {
-		panic(err)
-	}
-
-	return p
-}
-
-func writeFile(fileName string, b bytes.Buffer) {
-	err := ioutil.WriteFile(fileName+".html", b.Bytes(), 0644)
-
-	if err != nil {
-		panic(err)
-	}
-}
-
-func getSiteTitle() string {
-	return strings.Split(string(getFile("_sections/header.md")), "\n")[0][2:]
-}
-
-func getPostMeta(fi os.FileInfo) (string, string, string) {
-	id := fi.Name()[:len(fi.Name())-3]
-	date := fi.Name()[0:10]
-	title := strings.Split(string(getFile("_posts/"+fi.Name())), "\n")[0][2:]
-
-	return id, date, title
-}
-
-func getPageMeta(fi os.FileInfo) (string, string) {
-	id := fi.Name()[:len(fi.Name())-3]
-	title := strings.Split(string(getFile("_pages/"+fi.Name())), "\n")[0][2:]
-
-	return id, title
-}
-
-func writeIndex() {
-	var b bytes.Buffer
-	b.WriteString(getLayoutStart(getSiteTitle()))
-	b.Write(blackfriday.MarkdownCommon(getFile("_sections/header.md")))
-	writePostsSection(&b)
-	writePagesSection(&b)
-	b.WriteString(getLayoutEnd())
-	writeFile("index", b)
-}
-
-func writePostsSection(b *bytes.Buffer) {
-	b.WriteString("<h2>Posts</h2><nav class=\"posts\"><ul>")
-
-	posts := getDir("_posts")
-	limit := int(math.Max(float64(len(posts))-5, 0))
-
-	for i := len(posts) - 1; i >= limit; i-- {
-		fileName, date, title := getPostMeta(posts[i])
-
-		b.WriteString("<li><span class=\"date\">" + date +
-			"</span><a href=\"posts/" +
-			fileName + ".html\">" +
-			title + "</a></li>\n")
-	}
-
-	b.WriteString("</ul></nav><p class=\"all-posts\"><a href=\"all-posts.html\">All posts</a></p>")
-}
-
-func writePagesSection(b *bytes.Buffer) {
-	b.WriteString("<h2>Pages</h2><nav class=\"pages\"><ul>")
-
-	pages := getDir("_pages")
-
-	for i := 0; i < len(pages); i++ {
-		id, title := getPageMeta(pages[i])
-
-		b.WriteString("<li><a href=\"pages/" +
-			id + ".html\">" +
-			title + "</a></li>\n")
-	}
-
-	b.WriteString("</ul></nav>")
-}
-
-func writePosts() {
-	posts := getDir("_posts")
-
-	for i := 0; i < len(posts); i++ {
-		id, date, title := getPostMeta(posts[i])
-
-		var b bytes.Buffer
-		b.WriteString(getLayoutStart(title + " – " + getSiteTitle()))
-		b.WriteString("<p><a href=\"../index.html\">←</a></p>")
-		b.WriteString("<p class=\"date\">" + date + "</p>")
-		b.Write(blackfriday.MarkdownCommon(getFile("_posts/" + posts[i].Name())))
-		b.WriteString("<p><a href=\"../index.html\">←</a></p>")
-		b.WriteString(getLayoutEnd())
-
-		writeFile("posts/"+id, b)
-	}
-}
-
-func writePostsPage() {
-	posts := getDir("_posts")
-	var b bytes.Buffer
-
-	b.WriteString(getLayoutStart("All posts – " + getSiteTitle()))
-	b.WriteString("<p><a href=\"index.html\">←</a></p>")
-	b.WriteString("<h1>All posts</h1>")
-	b.WriteString("<nav class=\"posts\"><ul>")
-
-	for i := len(posts) - 1; i >= 0; i-- {
-		id, date, title := getPostMeta(posts[i])
-
-		b.WriteString("<li><span class=\"date\">" + date +
-			"</span><a href=\"posts/" +
-			id + ".html\">" +
-			title + "</a></li>\n")
-	}
-
-	b.WriteString("</ul></nav><p><a href=\"index.html\">←</a></p>")
-	b.WriteString(getLayoutEnd())
-	writeFile("all-posts", b)
-}
-
-func writePages() {
-	pages := getDir("_pages")
-
-	for i := 0; i < len(pages); i++ {
-		fileName, title := getPageMeta(pages[i])
-
-		var b bytes.Buffer
-		b.WriteString(getLayoutStart(title + " – " + getSiteTitle()))
-		b.WriteString("<p><a href=\"../index.html\">←</a></p>")
-		b.Write(blackfriday.MarkdownCommon(getFile("_pages/" + pages[i].Name())))
-		b.WriteString("<p><a href=\"../index.html\">←</a></p>")
-		b.WriteString(getLayoutEnd())
-
-		writeFile("pages/"+fileName, b)
-	}
+                if err != nil {
+                        panic(err)
+                }
+        }
 }
 
 func createFilesAndDirs() {
@@ -434,6 +460,7 @@ func createFilesAndDirs() {
 }
 
 func main() {
+	createTemplate()
 	createFilesAndDirs()
 	writeIndex()
 	writePosts()
